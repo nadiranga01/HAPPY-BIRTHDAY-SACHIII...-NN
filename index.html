@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Love ❤️ | A Magical Journey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --primary-purple: #2d0b5a;
+            --mid-purple: #4c1d95;
+            --accent-purple: #8b5cf6;
+            --soft-lavender: #ddd6fe;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0f172a;
+            color: white;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(76, 29, 149, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(30, 58, 138, 0.4) 0%, transparent 50%);
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(4rem, 15vw, 10rem);
+            line-height: 0.8;
+            font-weight: 900;
+        }
+
+        .font-romance {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #ddd6fe 0%, #a78bfa 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Particles/Floating objects */
+        .circle {
+            position: absolute;
+            background: linear-gradient(45deg, var(--accent-purple), #f472b6);
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.2;
+            z-index: -1;
+            animation: float 25s infinite alternate;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(150px, 80px) scale(1.3); }
+        }
+
+        /* Navigation hiding effect */
+        header {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s;
+        }
+        header.nav-hidden {
+            transform: translateY(-100%);
+        }
+
+        .nav-btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Entry Overlay / Splash Screen */
+        #entry-overlay {
+            position: fixed;
+            inset: 0;
+            background: #0f172a;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease-out, visibility 1s;
+        }
+
+        .heart-loader {
+            width: 150px;
+            height: 150px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            animation: heartBeat 1.5s infinite;
+        }
+        .heart-loader:hover { transform: scale(1.1); }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); filter: drop-shadow(0 0 10px #8b5cf6); }
+            50% { transform: scale(1.15); filter: drop-shadow(0 0 30px #f472b6); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 10px #8b5cf6); }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #4c1d95; border-radius: 10px; }
+
+        .big-text-stroke {
+            -webkit-text-stroke: 1px rgba(255,255,255,0.1);
+            color: transparent;
+            position: absolute;
+            z-index: -1;
+            font-size: 20vw;
+            font-weight: 900;
+            white-space: nowrap;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Entry Overlay -->
+    <div id="entry-overlay">
+        <div class="text-center space-y-8">
+            <div class="heart-loader text-8xl" onclick="startExperience()">💜</div>
+            <p class="text-purple-300 font-romance text-3xl animate__animated animate__pulse animate__infinite">Click to open my heart...</p>
+        </div>
+    </div>
+
+    <!-- Background Decoration -->
+    <div class="circle w-[500px] h-[500px] -top-20 -left-20"></div>
+    <div class="circle w-[400px] h-[400px] bottom-20 -right-20" style="animation-delay: -5s"></div>
+    <div class="big-text-stroke top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2">SACHII</div>
+
+    <!-- Navigation -->
+    <header id="main-header" class="fixed top-0 w-full z-50 px-6 py-6">
+        <nav class="max-w-7xl mx-auto flex justify-between items-center glass rounded-full px-8 py-3">
+            <div class="text-2xl font-romance font-bold gradient-text">Happy Birthday My Love ❤️</div>
+            <div class="hidden md:flex space-x-4">
+                <a href="index.html" class="nav-btn bg-white/10">Home</a>
+                <a href="gallery.html" class="nav-btn">Our Story</a>
+                <a href="videos.html" class="nav-btn">Moments</a>
+                <a href="wishes.html" class="nav-btn">My Wish</a>
+            </div>
+            <button class="md:hidden">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 relative overflow-hidden">
+            <div class="max-w-6xl mx-auto z-10 space-y-12">
+                <div class="animate__animated animate__fadeInDown">
+                    <span class="px-6 py-3 glass rounded-full text-purple-300 text-lg font-bold tracking-[0.5em] uppercase">Today is Your Day</span>
+                </div>
+                
+                <h1 class="hero-title animate__animated animate__zoomIn">
+                    <span class="block">HAPPY</span>
+                    <span class="gradient-text font-romance italic block my-4" style="font-size: 1.2em;">Birthday</span>
+                    <span class="text-white block">SACHII</span>
+                </h1>
+
+                <div class="animate__animated animate__fadeInUp animate__delay-1s space-y-10">
+                    <p class="text-white/60 text-xl md:text-3xl max-w-4xl mx-auto leading-relaxed font-light">
+                        "In your eyes, I found my home. In your smile, I found my happiness. You are the most beautiful chapter of my life's story."
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-6 justify-center">
+                        <a href="gallery.html" class="px-12 py-5 bg-purple-600 rounded-full font-bold shadow-2xl shadow-purple-500/40 hover:bg-purple-500 transition-all transform hover:-translate-y-1 flex items-center gap-3 text-lg">
+                            See Our Magic
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </a>
+                        <a href="wishes.html" class="px-12 py-5 glass rounded-full font-bold hover:bg-white/10 transition-all text-lg border border-white/20">Read My Message</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
+                <div class="w-1 h-12 bg-gradient-to-b from-purple-500 to-transparent rounded-full"></div>
+            </div>
+        </section>
+
+        <!-- Preview Section -->
+        <section class="py-32 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-20">
+                    <h2 class="text-5xl font-bold mb-6 gradient-text">Relive the Feelings</h2>
+                    <p class="text-white/40 text-lg">Swipe through our beautiful memories.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div class="glass p-10 rounded-[3rem] text-center hover:bg-white/5 transition duration-500 transform hover:-translate-y-4">
+                        <div class="text-6xl mb-8">💖</div>
+                        <h3 class="text-2xl font-bold mb-4">Infinite Love</h3>
+                        <p class="text-white/50">Every second spent with you is a gift from heaven.</p>
+                    </div>
+                    <div class="glass p-10 rounded-[3rem] text-center hover:bg-white/5 transition duration-500 transform hover:-translate-y-4 border-b-4 border-purple-500">
+                        <div class="text-6xl mb-8">✨</div>
+                        <h3 class="text-2xl font-bold mb-4">Magical Bond</h3>
+                        <p class="text-white/50">We are more than just a story; we are a masterpiece.</p>
+                    </div>
+                    <div class="glass p-10 rounded-[3rem] text-center hover:bg-white/5 transition duration-500 transform hover:-translate-y-4">
+                        <div class="text-6xl mb-8">🍷</div>
+                        <h3 class="text-2xl font-bold mb-4">Always Mine</h3>
+                        <p class="text-white/50">To many more years of laughter and deep love.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-20 border-t border-white/5 text-center">
+        <p class="font-romance text-4xl mb-6 gradient-text underline underline-offset-8">Forever & Always</p>
+        <p class="text-white/20 tracking-widest uppercase text-sm">Created for Sachi with Infinite Love</p>
+    </footer>
+
+    <!-- Background Audio -->
+    <div class="fixed bottom-8 right-8 z-50">
+        <audio id="bgMusic" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        // Start Experience Function
+        function startExperience() {
+            const overlay = document.getElementById('entry-overlay');
+            const music = document.getElementById('bgMusic');
+            
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.visibility = 'hidden';
+                music.play().catch(e => console.log("Autoplay blocked"));
+            }, 1000);
+        }
+
+        // Navigation Scroll Logic
+        let lastScrollTop = 0;
+        const header = document.getElementById('main-header');
+
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling down
+                header.classList.add('nav-hidden');
+            } else {
+                // Scrolling up
+                header.classList.remove('nav-hidden');
+                if (scrollTop > 50) {
+                    header.querySelector('nav').style.background = 'rgba(15, 23, 42, 0.8)';
+                } else {
+                    header.querySelector('nav').style.background = 'rgba(255, 255, 255, 0.03)';
+                }
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body>
+</html>

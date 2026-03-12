@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story | Happy Birthday Sachi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --primary-purple: #2d0b5a;
+            --accent-purple: #8b5cf6;
+            --gold: #fccb00;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0f172a;
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .font-romance { font-family: 'Dancing Script', cursive; }
+        .font-elegant { font-family: 'Playfair Display', serif; }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- Flipbook CSS --- */
+        .book-container {
+            perspective: 2000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 85vh;
+            padding: 40px 0;
+        }
+
+        .book {
+            width: 400px;
+            height: 550px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+
+        .page {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: left;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+            cursor: pointer;
+        }
+
+        .front, .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px 15px 15px 5px;
+            overflow: hidden;
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.5), 10px 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .back {
+            transform: rotateY(180deg);
+            background: #1e1b4b;
+            border-radius: 15px 5px 5px 15px;
+        }
+
+        .front {
+            background: #2d0b5a;
+        }
+
+        .page.flipped {
+            transform: rotateY(-180deg);
+        }
+
+        .page img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cover-page .front {
+            background: url('images/book_cover.png');
+            background-size: cover;
+            background-position: center;
+            border: 4px solid var(--gold);
+        }
+
+        .message-content {
+            padding: 40px;
+            text-align: center;
+            background: linear-gradient(to bottom, #2d0b5a, #1e1b4b);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- Heart Animation CSS --- */
+        #heart-stage {
+            display: none;
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .heart-photo {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid #a78bfa;
+            transition: all 1.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            opacity: 0;
+            transform: scale(0);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+            cursor: zoom-in;
+            z-index: 10;
+        }
+        .heart-photo:hover { 
+            transform: scale(1.5) !important;
+            z-index: 200;
+            border-color: #f472b6;
+        }
+
+        .heart-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.2rem; /* Smaller and cuter */
+            opacity: 0;
+            transition: opacity 2s;
+            text-shadow: 0 0 15px rgba(255,255,255,0.6);
+            z-index: 15; /* Sits naturally in the middle */
+            text-align: center;
+            color: white;
+            user-select: none;
+            line-height: 1.2;
+        }
+
+        .heart-label span {
+            font-size: 2.8rem;
+            display: block;
+            margin-top: 5px;
+            text-shadow: 0 0 20px rgba(255,100,150,0.5); /* Cute pinkish glow for name */
+        }
+
+        .sparkle {
+            position: absolute;
+            pointer-events: none;
+            background: white;
+            border-radius: 50%;
+            z-index: 100;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #ddd6fe 0%, #a78bfa 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-magic {
+            background: linear-gradient(45deg, #7c3aed, #db2777);
+            box-shadow: 0 0 30px rgba(124, 58, 237, 0.6);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-magic:hover { transform: scale(1.1); }
+
+        /* Lightbox Modal */
+        #lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            cursor: zoom-out;
+        }
+        #lightbox img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 15px;
+            border: 2px solid white;
+            box-shadow: 0 0 50px rgba(255,255,255,0.2);
+        }
+
+        .page-num {
+            position: absolute;
+            bottom: 10px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.3);
+        }
+        .front .page-num { right: 15px; }
+        .back .page-num { left: 15px; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <!-- Lightbox -->
+    <div id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Zoomed Photo">
+        <p class="text-white/60 mt-6 font-romance text-2xl">Beautiful Memory</p>
+    </div>
+
+    <nav class="mb-8 flex justify-between items-center max-w-7xl mx-auto">
+        <a href="index.html" class="glass px-6 py-2 rounded-full hover:bg-white/10 transition flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            Home
+        </a>
+        <h1 class="text-3xl font-romance gradient-text">Our Journey Together</h1>
+        <div class="w-24"></div>
+    </nav>
+
+    <!-- Flipbook Container -->
+    <div class="book-container" id="book-section">
+        <div class="book" id="myBook">
+            <!-- Pages will be injected by JS -->
+        </div>
+    </div>
+
+    <!-- Heart Stage -->
+    <div id="heart-stage">
+        <div class="heart-label font-romance" id="heart-text" onclick="textSurprise(event)">
+            Happy Birthday <br> 
+            <span>Sachi</span>
+        </div>
+        <!-- Photos will be injected here -->
+    </div>
+
+    <script>
+        const photos = [
+            'images/photo_2026-03-07_11-36-29.jpg', 'images/photo_2026-03-07_11-36-42.jpg',
+            'images/photo_2026-03-07_11-36-50.jpg', 'images/photo_2026-03-07_11-36-56.jpg',
+            'images/photo_2026-03-07_11-37-02.jpg', 'images/photo_2026-03-07_11-37-07.jpg',
+            'images/photo_2026-03-07_11-37-14.jpg', 'images/photo_2026-03-07_11-37-19.jpg',
+            'images/photo_2026-03-07_11-37-30.jpg', 'images/photo_2026-03-07_11-37-34.jpg',
+            'images/photo_2026-03-07_11-37-39.jpg', 'images/photo_2026-03-07_11-37-42.jpg',
+            'images/photo_2026-03-07_11-37-47.jpg', 'images/photo_2026-03-07_11-37-56.jpg',
+            'images/photo_2026-03-07_11-38-06.jpg', 'images/photo_2026-03-07_11-38-10.jpg',
+            'images/photo_2026-03-07_11-38-15.jpg', 'images/photo_2026-03-07_11-38-19.jpg',
+            'images/photo_2026-03-07_11-38-27.jpg', 'images/photo_2026-03-07_11-38-31.jpg',
+            'images/photo_2026-03-07_11-38-36.jpg', 'images/photo_2026-03-07_11-38-39.jpg',
+            'images/photo_2026-03-07_11-38-44.jpg', 'images/photo_2026-03-07_11-38-48.jpg',
+            'images/photo_2026-03-07_11-38-52.jpg', 'images/photo_2026-03-07_11-38-57.jpg'
+        ];
+
+        const book = document.getElementById('myBook');
+
+        function createBook() {
+            // 1. Cover Page
+            const coverPage = document.createElement('div');
+            coverPage.className = 'page cover-page';
+            coverPage.style.zIndex = 100;
+            coverPage.innerHTML = `
+                <div class="front"></div>
+                <div class="back">
+                    <div class="message-content">
+                        <h2 class="font-romance text-4xl mb-6 text-purple-300">To My Dearest...</h2>
+                        <div class="w-16 h-1 bg-purple-500 mb-6"></div>
+                        <p class="italic text-lg text-white/70">Turn the page for a surprise</p>
+                    </div>
+                </div>
+            `;
+            coverPage.onclick = function() { flipPage(this); };
+            book.appendChild(coverPage);
+
+            // 2. Message Page
+            const msgPage = document.createElement('div');
+            msgPage.className = 'page';
+            msgPage.style.zIndex = 99;
+            msgPage.innerHTML = `
+                <div class="front">
+                    <div class="message-content">
+                        <h2 class="font-romance text-4xl mb-8 text-purple-300 animate__animated animate__fadeIn">Happy Birthday Chuti Manika 💗</h2>
+                        <p class="font-elegant italic text-xl leading-relaxed text-indigo-100 animate__animated animate__fadeIn animate__delay-1s">
+                            "Happy Birthday to the one who makes my world a brighter and better place. Thank you for being in my life and making every moment special. I love you more than words can say! ❤️✨"
+                        </p>
+                    </div>
+                </div>
+                <div class="back">
+                    <img src="${photos[0]}" alt="Memory">
+                    <span class="page-num">1</span>
+                </div>
+            `;
+            msgPage.onclick = function() { flipPage(this); };
+            book.appendChild(msgPage);
+
+            // 3. Photo Pages
+            // We skip index 0 since it's on the back of the message page
+            for (let i = 1; i < photos.length; i += 2) {
+                const photoPage = document.createElement('div');
+                photoPage.className = 'page';
+                photoPage.style.zIndex = 99 - Math.ceil(i/2);
+                
+                let frontImg = photos[i];
+                let backImg = photos[i+1] || null;
+
+                let backContent = backImg 
+                    ? `<img src="${backImg}" alt="Memory">` 
+                    : `<div class="h-full flex flex-col justify-center items-center p-8 bg-indigo-900/40 text-center">
+                        <h3 class="text-4xl font-romance mb-6 gradient-text">The End of the Book...</h3>
+                        <p class="text-white/60 mb-8">But not the end of our story.</p>
+                        <button onclick="revealHeart()" class="btn-magic animate-bounce">Unlock My Heart 💜</button>
+                       </div>`;
+
+                photoPage.innerHTML = `
+                    <div class="front">
+                        <img src="${frontImg}" alt="Memory">
+                        <span class="page-num">${i+1}</span>
+                    </div>
+                    <div class="back">
+                        ${backContent}
+                        ${backImg ? `<span class="page-num">${i+2}</span>` : ''}
+                    </div>
+                `;
+                photoPage.onclick = function() { flipPage(this); };
+                book.appendChild(photoPage);
+            }
+        }
+
+        let currentZ = 100;
+        function flipPage(pageElement) {
+            pageElement.classList.toggle('flipped');
+            
+            // Adjust z-index to ensure flipped pages stay under the next ones but above previous ones
+            if (pageElement.classList.contains('flipped')) {
+                setTimeout(() => {
+                    pageElement.style.zIndex = 1;
+                }, 400); // Wait for half the transition
+            } else {
+                setTimeout(() => {
+                    // This is tricky with many pages, but since they are clicked in order, 
+                    // we can just restore a high z-index if flipped back.
+                    // For simplicity, we just use the initial logic.
+                    pageElement.style.zIndex = parseInt(pageElement.getAttribute('data-init-z'));
+                }, 400);
+            }
+        }
+
+        // Initialize init-z attributes
+        function initZ() {
+            const allPages = document.querySelectorAll('.page');
+            allPages.forEach((p, idx) => {
+                const z = 100 - idx;
+                p.style.zIndex = z;
+                p.setAttribute('data-init-z', z);
+            });
+        }
+
+        createBook();
+        initZ();
+
+        function revealHeart() {
+            document.body.style.backgroundColor = '#000';
+            document.getElementById('book-section').style.display = 'none';
+            const stage = document.getElementById('heart-stage');
+            stage.style.display = 'block';
+
+            const centerWidth = window.innerWidth / 2;
+            const centerHeight = window.innerHeight / 2;
+
+            photos.forEach((src, index) => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.className = 'heart-photo';
+                img.onclick = (e) => {
+                    e.stopPropagation();
+                    openLightbox(src);
+                };
+                
+                img.style.left = centerWidth + 'px';
+                img.style.top = centerHeight + 'px';
+                stage.appendChild(img);
+
+                setTimeout(() => {
+                    const angle = (index / photos.length) * 2 * Math.PI;
+                    const x = 16 * Math.pow(Math.sin(angle), 3);
+                    const y = -(13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle));
+                    
+                    const scaleFactor = window.innerWidth < 768 ? 9 : 14; 
+                    img.style.left = (centerWidth + x * scaleFactor - 50) + 'px';
+                    img.style.top = (centerHeight + y * scaleFactor - 50) + 'px';
+                    img.style.opacity = '1';
+                    img.style.transform = 'rotate(' + (Math.random() * 20 - 10) + 'deg) scale(1)';
+                }, index * 80);
+            });
+
+            setTimeout(() => {
+                const heartText = document.getElementById('heart-text');
+                heartText.style.opacity = '1';
+                heartText.classList.add('animate__animated', 'animate__zoomIn');
+            }, photos.length * 80 + 1000);
+        }
+
+        function openLightbox(src) {
+            const lb = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            lb.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        function textSurprise(e) {
+            const colors = ['#ff0055', '#ff99cc', '#ffffff', '#8b5cf6'];
+            const stage = document.getElementById('heart-stage');
+            
+            for (let i = 0; i < 40; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                
+                const size = Math.random() * 10 + 5;
+                sparkle.style.width = size + 'px';
+                sparkle.style.height = size + 'px';
+                sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                sparkle.style.left = e.clientX + 'px';
+                sparkle.style.top = e.clientY + 'px';
+                
+                stage.appendChild(sparkle);
+                
+                const destinationX = (Math.random() - 0.5) * 600;
+                const destinationY = (Math.random() - 0.5) * 600;
+                const rotation = Math.random() * 360;
+                
+                const animation = sparkle.animate([
+                    { transform: 'translate(0, 0) scale(1) rotate(0deg)', opacity: 1 },
+                    { transform: `translate(${destinationX}px, ${destinationY}px) scale(0) rotate(${rotation}deg)`, opacity: 0 }
+                ], {
+                    duration: 1000 + Math.random() * 1000,
+                    easing: 'cubic-bezier(0, .9, .57, 1)'
+                });
+                
+                animation.onfinish = () => sparkle.remove();
+            }
+
+            // Removed positional movement to keep it perfectly centered
+            const text = document.getElementById('heart-text');
+            text.classList.remove('animate__zoomIn');
+        }
+    </script>
+</body>
+</html>
